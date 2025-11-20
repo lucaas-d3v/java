@@ -1,22 +1,27 @@
-public class Gerente extends Funcionario{
-	private double salarioLiquido;
+import java.math.BigDecimal;
+
+public class Gerente extends Funcionario {
+	private double bonus;
 
 	@Override
-	public double calcularSalario(){
-		return 0;
+	public double calcularSalarioLiquido() {
+		return getSalarioBase() + getBonus();
 	}
 
-	public Gerente(String nome, String matricula, double salarioBase, double bonus){
+	public Gerente(String nome, String matricula, double salarioBase, double bonus) {
 		super(nome, matricula, salarioBase);
-		this.salarioLiquido = salarioBase + bonus;
+		this.bonus = bonus;
 	}
 
-	public double getSalarioLiquido(){
-		return this.salarioLiquido;
+	public double getBonus() {
+		return bonus;
 	}
 
-	public void exibirDados(){
-		super().exibirDados();
-		System.out.println("Salario Líquido: " + getSalarioLiquido());
+	public void exibirDados() {
+		BigDecimal salario = new BigDecimal(calcularSalarioLiquido()).setScale(2);
+
+		super.exibirDados();
+		System.out.println("Bônus: " + getBonus());
+		System.out.println("Salario Líquido: " + salario);
 	}
 }
